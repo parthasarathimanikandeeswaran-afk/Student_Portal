@@ -1,0 +1,2 @@
+ALTER TABLE Students
+ADD SerialNumber INT NOT NULL DEFAULT 20000;
