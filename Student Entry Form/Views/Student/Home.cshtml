@@ -1,0 +1,43 @@
+﻿@model DashboardStatsViewModel
+
+<head>
+    <link rel="stylesheet" href="~/css/home.css" />
+</head>
+
+<div class="container">
+    <h1 class="page-title">Welcome to Student Information Entry Portal</h1>
+
+    <div class="section-container">
+
+        <div class="students-perform-container">
+
+            <div class="card blue">
+                <h2>@(Model?.TotalStudents ?? 0)</h2>
+                <p>Total Students</p>
+            </div>
+
+            <div class="card green">
+                <h2>@(Model?.Passed ?? 0)</h2>
+                <p>Passed</p>
+            </div>
+
+            <div class="card red">
+                <h2>@(Model?.Failed ?? 0)</h2>
+                <p>Failed</p>
+            </div>
+
+            <div class="card orange">
+                <h2>@string.Format("{0:0.00}%", Model?.AveragePerformance ?? 0)</h2>
+                <p>Average Performance</p>
+            </div>
+
+        </div>
+
+        <div class="option-container">
+            <a class="action-btn" href="/Student/StudentEntry">➕ Add Student</a>
+            <a class="action-btn" href="/Student/StudentsDetails">📋 View Students</a>
+            <a class="action-btn" href="/Student/ResultForm">🔍 Check Result</a>
+        </div>
+
+    </div>
+</div>

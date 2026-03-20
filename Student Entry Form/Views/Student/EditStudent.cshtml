@@ -1,0 +1,418 @@
+﻿@model Student_Entry_Form.Models.StudentEditViewModel
+
+<link rel="stylesheet" href="~/css/StudentEdit.css" />
+
+<div class="edit-container">
+    <h1>Update Student</h1>
+    <span>Ack No: @Model.Student.AckNo</span>
+
+    <form asp-action="EditStudent" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Student.StudentId" />
+        <input type="hidden" asp-for="Student.AckNo" />
+
+        <div class="search-form">
+
+            <div class="form-group">
+                <label for="FullName">Full Name</label>
+                <input asp-for="Student.FullName" id="FullName" placeholder="Enter full name" />
+            </div>
+
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input asp-for="Student.Email" id="Email" placeholder="Enter email" />
+            </div>
+
+            <div class="form-group">
+                <label for="Mobile">Mobile</label>
+                <input asp-for="Student.Mobile" id="Mobile" placeholder="Enter mobile number" />
+            </div>
+
+            <div class="form-group">
+                <label for="DateOfBirth">Date of Birth</label>
+                <input asp-for="Student.DateOfBirth" type="date" id="DateOfBirth" />
+            </div>
+
+            <div class="form-group">
+                <label for="AddressLine1">Address</label>
+                <input asp-for="Student.AddressLine1" id="AddressLine1" placeholder="Enter address" />
+            </div>
+
+            <div class="form-group">
+                <label>District</label>
+                <select id="district" name="Student.District" required></select>
+            </div>
+
+            <div class="form-group">
+                <label>Taluk</label>
+                <select id="taluk" name="Student.Taluk" required></select>
+            </div>
+
+            <div class="form-group">
+                <label>Village</label>
+                <select id="village" name="Student.Village" required></select>
+            </div>
+
+            <div class="form-group">
+                <label>Pincode</label>
+                <input asp-for="Student.Pincode" id="pincode" readonly />
+            </div>
+
+
+            <h3>Marks</h3>
+            <table class="marks-table">
+                <tr>
+                    <th>Subject</th>
+                    <th>Marks</th>
+                </tr>
+                @for (int i = 0; i < Model.Marks.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.Marks[i].SubjectName
+                            <input type="hidden" asp-for="Marks[i].SubjectId" />
+                            <input type="hidden" asp-for="Marks[i].SubjectName" />
+                        </td>
+                        <td>
+                            <input asp-for="Marks[i].Marks" type="number" min="0" max="100" />
+                        </td>
+                    </tr>
+                }
+            </table>
+
+            <button type="submit" class="btn-update">Update</button>
+            <a asp-action="StudentsDetails" class="btn-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    <script>
+
+
+
+            const locationData = {
+          "Ariyalur": {
+            "Ariyalur": { "Ariyalur Town": "621704", "Kayarlabath": "621705", "Sendurai": "621714" },
+            "Sendurai": { "Sendurai": "621714", "Irumbilikurichi": "621715", "Kulumur": "621716" },
+            "Udayarpalayam": { "Udayarpalayam": "621804", "Varadarajanpettai": "621805", "Andimadam": "621801" }
+          },
+          "Chengalpattu": {
+            "Chengalpattu": { "Chengalpattu": "603001", "Paranur": "603002", "Singaperumal Koil": "603204" },
+            "Tambaram": { "Tambaram": "600045", "Selaiyur": "600073", "Mudichur": "600048" },
+            "Vandalur": { "Vandalur": "600048", "Mannivakkam": "600048", "Perungalathur": "600063" }
+          },
+          "Chennai": {
+            "Ambattur": { "Korattur": "600080", "Mugappair": "600037", "Padi": "600050" },
+            "Egmore": { "Egmore": "600008", "Kilpauk": "600010", "Pudupet": "600002" },
+            "Ayanavaram": { "Ayanavaram": "600023", "Perambur": "600011", "Otteri": "600012" }
+          },
+          "Coimbatore": {
+            "Coimbatore North": { "Ganapathy": "641006", "Peelamedu": "641004", "Saravanampatti": "641035" },
+            "Coimbatore South": { "Sundarapuram": "641024", "Podanur": "641023", "Singanallur": "641005" },
+            "Pollachi": { "Pollachi": "642001", "Anaimalai": "642104", "Kottur": "642114" }
+          },
+          "Cuddalore": {
+            "Cuddalore": { "Cuddalore": "607001", "Manjakuppam": "607001", "Devanampattinam": "607001" },
+            "Chidambaram": { "Chidambaram": "608001", "Parangipettai": "608502", "Bhuvanagiri": "608601" },
+            "Panruti": { "Panruti": "607106", "Nellikuppam": "607105", "Melpattampakkam": "607104" }
+          },
+          "Dharmapuri": {
+            "Dharmapuri": { "Dharmapuri": "636701", "Adhagapadi": "636803", "Hogenakkal": "636810" },
+            "Harur": { "Harur": "636903", "Morappur": "635305", "Theerthamalai": "636906" },
+            "Palacode": { "Palacode": "636808", "Belrampatti": "636808", "Marandahalli": "636806" }
+          },
+          "Dindigul": {
+            "Dindigul": { "Dindigul": "624001", "Begambur": "624002", "Nagalnagar": "624003" },
+            "Palani": { "Palani": "624601", "Ayyampalayam": "624204", "Oddanchatram": "624619" },
+            "Nilakottai": { "Nilakottai": "624208", "Batlagundu": "624202", "Sirumalai": "624212" }
+          },
+          "Erode": {
+            "Erode": { "Erode": "638001", "Surampatti": "638009", "Perundurai": "638052" },
+            "Gobichettipalayam": { "Gobi": "638452", "Sathyamangalam": "638401", "Nambiyur": "638458" },
+            "Bhavani": { "Bhavani": "638301", "Komarapalayam": "638183", "Anthiyur": "638501" }
+          },
+          "Kallakurichi": {
+            "Kallakurichi": { "Kallakurichi": "606202", "Chinnasalem": "606201", "Sankarapuram": "606401" },
+            "Ulundurpet": { "Ulundurpet": "606107", "Thirunavalur": "606107", "Koovagam": "606102" },
+            "Tirukkoyilur": { "Tirukkoyilur": "605757", "Ariyalur": "605801", "Vadakkanandal": "606207" }
+          },
+          "Kancheepuram": {
+            "Kancheepuram": { "Kancheepuram": "631501", "Walajabad": "631605", "Uthiramerur": "603406" },
+            "Sriperumbudur": { "Sriperumbudur": "602105", "Oragadam": "602105", "Sunguvarchatram": "602106" },
+            "Kundrathur": { "Kundrathur": "600069", "Mangadu": "600122", "Poonamallee": "600056" }
+          },
+          "Karur": {
+            "Karur": { "Karur": "639001", "Thanthonimalai": "639005", "Pasupathipalayam": "639004" },
+            "Kulithalai": { "Kulithalai": "639107", "Krishnarayapuram": "639102", "Mayanoor": "639108" },
+            "Aravakurichi": { "Aravakurichi": "639201", "Esanatham": "639203", "Pallapatti": "639205" }
+          },
+          "Krishnagiri": {
+            "Krishnagiri": { "Krishnagiri": "635001", "Anchetty": "635102", "Bargur": "635104" },
+            "Hosur": { "Hosur": "635109", "Bagalur": "635103", "Kelamangalam": "635113" },
+            "Denkanikottai": { "Denkanikottai": "635107", "Urigam": "635102", "Royakottai": "635116" }
+          },
+          "Madurai": {
+            "Madurai North": { "Tallakulam": "625002", "Sellur": "625002", "Anna Nagar": "625020" },
+            "Madurai South": { "Thiruparankundram": "625005", "Simmakkal": "625001", "Palanganatham": "625003" },
+            "Thirumangalam": { "Thirumangalam": "625706", "Usilampatti": "625532", "Kalligudi": "625701" }
+          },
+          "Mayiladuthurai": {
+            "Mayiladuthurai": { "Mayiladuthurai": "609001", "Kuthalam": "609801", "Sirkazhi": "609110" },
+            "Sirkazhi": { "Sirkazhi": "609110", "Thiruvengadu": "609114", "Poompuhar": "609105" },
+            "Tharangambadi": { "Tharangambadi": "609313", "Poraiyar": "609307", "Kollidam": "609102" }
+          },
+          "Nagapattinam": {
+            "Nagapattinam": { "Nagapattinam": "611001", "Velankanni": "611111", "Vedaranyam": "614810" },
+            "Kilvelur": { "Kilvelur": "611104", "Keezhvelur": "611104", "Thevur": "611109" },
+            "Thirukkuvalai": { "Thirukkuvalai": "610204", "Manalmedu": "609202", "Voimedu": "614714" }
+          },
+          "Namakkal": {
+            "Namakkal": { "Namakkal": "637001", "Erumaipatti": "637013", "Sendamangalam": "637409" },
+            "Rasipuram": { "Rasipuram": "637408", "Pattanam": "637408", "Belukurichi": "637402" },
+            "Tiruchengode": { "Tiruchengode": "637211", "Kumarapalayam": "638183", "Pallipalayam": "638006" }
+          },
+          "Perambalur": {
+            "Perambalur": { "Perambalur": "621212", "Veppanthattai": "621116", "Labbaikudikadu": "621108" },
+            "Kunnam": { "Kunnam": "621708", "Pennadam": "606105", "Siruvachur": "621113" },
+            "Alathur": { "Alathur": "621303", "Keelapuliyur": "621115", "Varagur": "621113" }
+          },
+          "Pudukkottai": {
+            "Pudukkottai": { "Pudukkottai": "622001", "Thirumayam": "622507", "Annavasal": "622101" },
+            "Aranthangi": { "Aranthangi": "614616", "Avudaiyarkoil": "614618", "Manamelkudi": "614620" },
+            "Iluppur": { "Iluppur": "622102", "Keeranur": "622502", "Viralimalai": "621316" }
+          },
+          "Ramanathapuram": {
+            "Ramanathapuram": { "Ramanathapuram": "623501", "Mandapam": "623518", "Rameswaram": "623526" },
+            "Paramakudi": { "Paramakudi": "623707", "Bogalur": "623527", "Kamuthi": "623603" },
+            "Tiruvadanai": { "Tiruvadanai": "623407", "RS Mangalam": "623525", "Uchipuli": "623534" }
+          },
+          "Salem": {
+            "Salem": { "Salem": "636001", "Ammapet": "636003", "Hasthampatti": "636007" },
+            "Mettur": { "Mettur": "636401", "Mecheri": "636453", "Kolathur": "636303" },
+            "Attur": { "Attur": "636102", "Gangavalli": "636105", "Pethanaickenpalayam": "636109" }
+          },
+          "Sivaganga": {
+            "Sivaganga": { "Sivaganga": "630561", "Kalaiyarkoil": "630551", "Ilayangudi": "630702" },
+            "Karaikudi": { "Karaikudi": "630001", "Kanadukathan": "630103", "Pallathur": "630107" },
+            "Devakottai": { "Devakottai": "630303", "Thirupathur": "630211", "Kandarvakottai": "614902" }
+          },
+          "Tenkasi": {
+            "Tenkasi": { "Tenkasi": "627811", "Courtallam": "627802", "Sankarankovil": "627756" },
+            "Shenkottai": { "Shenkottai": "627809", "Puliyarai": "627813", "Vadakarai": "627812" },
+            "Alangulam": { "Alangulam": "627851", "Keelapavoor": "627806", "Kadayanallur": "627751" }
+          },
+          "Thanjavur": {
+            "Thanjavur": { "Thanjavur": "613001", "Vallam": "613403", "Orathanadu": "614625" },
+            "Pattukkottai": { "Pattukkottai": "614601", "Peravurani": "614804", "Madukkur": "614903" },
+            "Kumbakonam": { "Kumbakonam": "612001", "Swamimalai": "612302", "Thiruvidaimarudur": "612104" }
+          },
+          "Theni": {
+            "Theni": { "Theni": "625531", "Veerapandi": "625534", "Bodinayakanur": "625513" },
+            "Periyakulam": { "Periyakulam": "625601", "Gudalur": "625518", "Devadanapatti": "625602" },
+            "Andipatti": { "Andipatti": "625512", "Uthamapalayam": "625533", "Chinnamanur": "625515" }
+          },
+          "Thoothukudi": {
+            "Thoothukudi": { "Thoothukudi": "628001", "Muthiahpuram": "628005", "Ettayapuram": "628902" },
+            "Kovilpatti": { "Kovilpatti": "628501", "Kayathar": "628952", "Vilathikulam": "628907" },
+            "Tiruchendur": { "Tiruchendur": "628215", "Authoor": "628151", "Sathankulam": "628704" }
+          },
+          "Tiruchirappalli": {
+            "Lalgudi": { "Lalgudi": "621601", "Pullambadi": "621711", "Samayapuram": "621112" },
+            "Srirangam": { "Srirangam": "620006", "Thiruvanaikoil": "620005", "Woraiyur": "620003" },
+            "Thuraiyur": { "Thuraiyur": "621010", "Musiri": "621211", "Manachanallur": "621005" }
+          },
+          "Tirunelveli": {
+            "Palayamkottai": { "Palayamkottai": "627002", "Melapalayam": "627005", "KTC Nagar": "627011" },
+            "Tirunelveli": { "Tirunelveli Town": "627006", "Vannarpettai": "627003", "Suthamalli": "627004" },
+            "Ambasamudram": { "Ambasamudram": "627401", "Kadayam": "627415", "Papanasam": "627425" }
+          },
+          "Tirupattur": {
+            "Tirupattur": { "Tirupattur": "635601", "Vaniyambadi": "635751", "Ambur": "635802" },
+            "Natrampalli": { "Natrampalli": "635852", "Jolarpet": "635851", "Kandili": "635901" },
+            "Alangayam": { "Alangayam": "635701", "Peranambattu": "635810", "Uthangarai": "635207" }
+          },
+          "Tiruppur": {
+            "Tiruppur": { "Tiruppur": "641601", "Avinashi": "641654", "Palladam": "641664" },
+            "Dharapuram": { "Dharapuram": "638656", "Kangeyam": "638701", "Mulanur": "638106" },
+            "Udumalpet": { "Udumalpet": "642126", "Madathukulam": "642113", "Amaravathi Nagar": "642102" }
+          },
+          "Tiruvallur": {
+            "Tiruvallur": { "Tiruvallur": "602001", "Thiruninravur": "602024", "Poonamallee": "600056" },
+            "Gummidipoondi": { "Gummidipoondi": "601201", "Ponneri": "601204", "Minjur": "601203" },
+            "Uthukottai": { "Uthukottai": "602026", "Ellapuram": "601103", "Periyapalayam": "601102" }
+          },
+          "Tiruvannamalai": {
+            "Tiruvannamalai": { "Tiruvannamalai": "606601", "Polur": "606803", "Chengam": "606701" },
+            "Cheyyar": { "Cheyyar": "604407", "Vandavasi": "604408", "Arani": "632301" },
+            "Thandrampet": { "Thandrampet": "606707", "Kilpennathur": "604601", "Chetpet": "606801" }
+          },
+          "Tiruvarur": {
+            "Tiruvarur": { "Tiruvarur": "610001", "Thiruthuraipoondi": "614713", "Valangaiman": "612804" },
+            "Mannargudi": { "Mannargudi": "614001", "Koothanallur": "614101", "Needamangalam": "614404" },
+            "Nannilam": { "Nannilam": "610105", "Kodavasal": "612601", "Thirukannapuram": "609704" }
+          },
+          "Vellore": {
+            "Vellore": { "Vellore": "632001", "Katpadi": "632007", "Virinjipuram": "632104" },
+            "Gudiyatham": { "Gudiyatham": "632602", "Pernambut": "635810", "Ambur": "635802" },
+            "Arakonam": { "Arakonam": "631001", "Sholinghur": "631102", "Walajah": "632513" }
+          },
+          "Viluppuram": {
+            "Viluppuram": { "Viluppuram": "605602", "Vikravandi": "605652", "Thiruvennainallur": "607203" },
+            "Tindivanam": { "Tindivanam": "604001", "Gingee": "604202", "Marakkanam": "604303" },
+            "Kallakurichi": { "Kallakurichi": "606202", "Sankarapuram": "606401", "Chinnasalem": "606201" }
+          },
+          "Virudhunagar": {
+            "Virudhunagar": { "Virudhunagar": "626001", "Sattur": "626203", "Aruppukkottai": "626101" },
+            "Rajapalayam": { "Rajapalayam": "626117", "Srivilliputhur": "626125", "Watrap": "626132" },
+            "Sivakasi": { "Sivakasi": "626123", "Vembakottai": "626131", "Alangulam": "626127" }
+          },
+          "Kanyakumari": {
+            "Agastheeswaram": { "Nagercoil": "629001", "Suchindram": "629704", "Anjugramam": "629701" },
+            "Thovalai": { "Thovalai": "629302", "Aralvoimozhi": "629301", "Boothapandi": "629852" },
+            "Kalkulam": { "Padmanabhapuram": "629175", "Thuckalay": "629175", "Colachel": "629251" }
+          },
+          "Nilgiris": {
+            "Udhagamandalam": { "Ooty": "643001", "Lovedale": "643003", "Fernhill": "643004" },
+            "Coonoor": { "Coonoor": "643101", "Wellington": "643231", "Aravankadu": "643202" },
+            "Gudalur": { "Gudalur": "643212", "Masinagudi": "643223", "Devala": "643212" }
+          },
+          "Ranipet": {
+            "Ranipet": { "Ranipet": "632401", "Arcot": "632503", "Walajah": "632513" },
+            "Arakkonam": { "Arakkonam": "631001", "Nemili": "631051", "Sholinghur": "631102" },
+            "Kalavai": { "Kalavai": "632506", "Melvisharam": "632509", "Timiri": "632512" }
+          }
+        };
+
+
+        const districtSel = document.getElementById("district");
+        const talukSel = document.getElementById("taluk");
+        const villageSel = document.getElementById("village");
+        const pincodeInput = document.getElementById("pincode");
+
+      
+        const selectedDistrict = "@Model.Student.District";
+        const selectedTaluk = "@Model.Student.Taluk";
+        const selectedVillage = "@Model.Student.Village";
+
+       
+        window.onload = () => {
+            districtSel.innerHTML = `<option value="">-- Select District --</option>`;
+            Object.keys(locationData).forEach(d => {
+                const opt = new Option(d, d);
+                if (d === selectedDistrict) opt.selected = true;
+                districtSel.add(opt);
+            });
+
+            if (selectedDistrict) loadTaluks(selectedDistrict);
+        };
+
+        function loadTaluks(district) {
+            talukSel.innerHTML = `<option value="">-- Select Taluk --</option>`;
+            villageSel.innerHTML = `<option value="">-- Select Village --</option>`;
+            pincodeInput.value = "";
+
+            Object.keys(locationData[district]).forEach(t => {
+                const opt = new Option(t, t);
+                if (t === selectedTaluk) opt.selected = true;
+                talukSel.add(opt);
+            });
+
+            if (selectedTaluk) loadVillages(district, selectedTaluk);
+        }
+
+        function loadVillages(district, taluk) {
+            villageSel.innerHTML = `<option value="">-- Select Village --</option>`;
+            const villages = locationData[district][taluk];
+
+            Object.keys(villages).forEach(v => {
+                const opt = new Option(v, v);
+                if (v === selectedVillage) opt.selected = true;
+                villageSel.add(opt);
+            });
+
+            if (selectedVillage) {
+                pincodeInput.value = villages[selectedVillage];
+            }
+        }
+
+        districtSel.addEventListener("change", () => {
+            loadTaluks(districtSel.value);
+        });
+
+        talukSel.addEventListener("change", () => {
+            loadVillages(districtSel.value, talukSel.value);
+        });
+
+        villageSel.addEventListener("change", () => {
+            const pin =
+                locationData[districtSel.value][talukSel.value][villageSel.value];
+            pincodeInput.value = pin || "";
+        });
+    
+
+
+
+
+        document.getElementById("editStudentForm").addEventListener("submit", function (e) {
+
+            let error = document.getElementById("clientError");
+            error.innerText = "";
+
+            let fullName = document.getElementById("FullName").value.trim();
+            let mobile = document.getElementById("Mobile").value.trim();
+            let dob = document.getElementById("DateOfBirth").value;
+
+            if (fullName === "") {
+                error.innerText = "❌ Full Name is required";
+                e.preventDefault();
+                return;
+            }
+
+            if (!/^[6-9]\d{9}$/.test(mobile)) {
+                error.innerText = "❌ Enter valid 10 digit mobile number";
+                e.preventDefault();
+                return;
+            }
+
+            if (dob === "") {
+                error.innerText = "❌ Date of Birth is required";
+                e.preventDefault();
+                return;
+            }
+
+            let markInputs = document.querySelectorAll("input[type='number']");
+
+            for (let i = 0; i < markInputs.length; i++) {
+                let val = markInputs[i].value;
+
+                if (val === "") {
+                    error.innerText = "❌ All marks are required";
+                    e.preventDefault();
+                    return;
+                }
+
+                let mark = parseInt(val);
+
+                if (mark < 0 || mark > 100) {
+                    error.innerText = "❌ Marks must be between 0 and 100";
+                    e.preventDefault();
+                    return;
+                }
+            }
+
+        });
+    </script>
+}
+
+
+
+

@@ -1,0 +1,55 @@
+﻿/* ===== Layout Base ===== */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #f2f6fc;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+    background: linear-gradient(90deg, #2b4c7e, #1e88e5);
+    padding: 14px 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: #fff;
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+/* Nav links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    margin: 0;
+    padding: 0;
+}
+
+    .nav-links li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 8px 14px;
+        border-radius: 20px;
+        transition: 0.3s;
+    }
+
+        .nav-links li a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+/* ===== Content Area ===== */
+.content {
+    padding: 30px 15px;
+}

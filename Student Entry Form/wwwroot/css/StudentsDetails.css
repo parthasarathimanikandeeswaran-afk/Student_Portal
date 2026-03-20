@@ -1,0 +1,99 @@
+﻿/* Page center fix */
+.student-page {
+    display: flex;
+    justify-content: center; /* centers horizontally */
+    width: 100%;
+    padding: 40px 15px;
+    box-sizing: border-box;
+}
+
+
+/* Card */
+.student-card {
+    width: 100%;
+    max-width: 1000px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 22px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+}
+
+
+    /* Title */
+    .student-card h1 {
+        text-align: center;
+        color: #2b4c7e;
+        margin-bottom: 25px;
+    }
+
+/* Search row */
+.search-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+    .search-row input {
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 1px solid #d7e3f4;
+        min-width: 200px;
+    }
+
+    .search-row button,
+    .update-btn {
+        background: linear-gradient(90deg,#4facfe,#00c6fb);
+        border: none;
+        padding: 10px 22px;
+        border-radius: 20px;
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+/* Table */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: linear-gradient(90deg,#4facfe,#43e97b);
+    color: white;
+    padding: 12px;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background: #f6fbff;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .search-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+        .search-row input,
+        .search-row button {
+            width: 100%;
+        }
+}
+
+
+.search-row select {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #d7e3f4;
+}

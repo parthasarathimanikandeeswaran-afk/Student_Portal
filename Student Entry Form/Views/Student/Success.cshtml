@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Success";
+}
+
+<link rel="stylesheet" href="~/css/success.css" />
+
+<div class="success-container">
+    <h2>Student Registered Successfully ✅</h2>
+
+    <div class="info-box">
+        <p><strong>Acknowledgement No:</strong> @ViewBag.AckNo</p>
+        <p><strong>Mobile Number:</strong> @ViewBag.Mobile</p>
+    </div>
+
+    <a class="btn" asp-action="StudentEntry">Back to Entry</a>
+</div>

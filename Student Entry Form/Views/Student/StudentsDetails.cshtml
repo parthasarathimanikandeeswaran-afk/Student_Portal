@@ -1,0 +1,103 @@
+﻿@model List<Student_Entry_Form.Models.StudentListViewModel>
+
+@{
+    ViewData["Title"] = "Student Details";
+ }
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/StudentsDetails.css" />
+}
+
+<div class="student-page">
+    <div class="student-card">
+
+        <h1>Student Details</h1>
+
+        <form method="get"
+              asp-action="StudentsDetails"
+              asp-controller="Student"
+              class="search-row">
+
+         
+
+            <div class="search-row">
+                <label>Search By</label>
+
+                <select id="searchType">
+                    <option value="name">Name</option>
+                    <option value="mobile">Phone Number</option>
+                    <option value="ack">Ack No</option>
+                </select>
+
+                <input type="text"
+                       id="searchInput"
+                       placeholder="Type to search..."
+                       onkeyup="filterStudents()" />
+            </div>
+
+        </form>
+
+        <div class="table-wrapper">
+          
+
+            <table id="studentTable">
+                <thead>
+                    <tr>
+                        <th>Ack No</th>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>District</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="ack">@item.AckNo</td>
+                            <td class="name">@item.FullName</td>
+                            <td class="mobile">@item.Mobile</td>
+                            <td>@item.District</td>
+
+                            <td>
+                                <a style="text-decoration:none" class="update-btn"
+                                   asp-action="EditStudent"
+                                   asp-route-id="@item.StudentId">
+                                    Update
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@section Scripts {
+    <script>
+        function filterStudents() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const type = document.getElementById("searchType").value;
+            const rows = document.querySelectorAll("#studentTable tbody tr");
+
+            rows.forEach(row => {
+                const cell = row.querySelector("." + type);
+                const text = cell.textContent.toLowerCase();
+
+                row.style.display = text.includes(input) ? "" : "none";
+            });
+        }
+    </script>
+}

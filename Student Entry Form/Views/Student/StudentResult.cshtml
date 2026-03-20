@@ -1,0 +1,72 @@
+﻿@model Student_Entry_Form.Models.StudentResultViewModel
+
+@{
+    ViewData["Title"] = "Student Result";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/StudentResult.css" />
+}
+
+<div class="result-container">
+
+    <h1>Student Result</h1>
+
+    <p class="ack">
+        Acknowledgement No:
+        <span><b>@Model.AckNo</b></span>
+    </p>
+
+    <div class="personal-details-container">
+
+        <h2 class="student-name">@Model.FullName</h2>
+
+        <div class="details-row">
+            <h3>Name : <span>@Model.FullName</span></h3>
+            <h3>Email : <span>@Model.Email</span></h3>
+        </div>
+
+        <div class="details-row">
+            <h3>Mobile No : <span>@Model.Mobile</span></h3>
+            <h3>
+                Status :
+                <span class="@(Model.ResultStatus == "Pass" ? "result-pass" : "result-fail")">
+                    @Model.ResultStatus
+                </span>
+            </h3>
+        </div>
+
+    </div>
+
+    <div class="marks-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Marks)
+                {
+                    <tr>
+                        <td>@item.SubjectName</td>
+                        <td>@item.Marks</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="summary-container">
+        <h2>Total Marks: <span>@Model.TotalMarks / 500</span></h2>
+        <h2>Percentage: <span>@Model.Percentage %</span></h2>
+        <h2 class="@(Model.ResultStatus == "Pass" ? "result-pass" : "result-fail")">
+            Result: <span>@Model.ResultStatus</span>
+        </h2>
+    </div>
+
+    <button onclick="window.print()">Print Result</button>
+    <br />
+    <a asp-action="MoveResultForm" asp-controller="Student" style="text-decoration:none" class="back-btn"><button>Back</button></a>
+</div>

@@ -1,0 +1,74 @@
+﻿@model LoginPageViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/css/login.css" />
+
+<div class="login-page">
+    <div class="login-card">
+
+        <h2>Student Portal Login</h2>
+
+      
+
+        <div class="tab-buttons">
+            <button type="button" id="studentBtn" class="active" onclick="showStudent()">Student</button>
+            <button type="button" id="adminBtn" onclick="showAdmin()">Admin</button>
+        </div>
+
+      
+        <form method="post"
+              asp-controller="Account"
+              asp-action="StudentLogin"
+              id="studentForm"
+              class="login-form">
+
+            <label asp-for="Student.AckNo"></label>
+            <input asp-for="Student.AckNo" />
+            <span asp-validation-for="Student.AckNo"></span>
+
+            <label asp-for="Student.DateOfBirth"></label>
+            <input asp-for="Student.DateOfBirth" type="date" />
+            <span asp-validation-for="Student.DateOfBirth"></span>
+
+            <button type="submit">Login as Student</button>
+        </form>
+
+        <form method="post"
+              asp-controller="Account"
+              asp-action="AdminLogin"
+              id="adminForm"
+              class="login-form hidden">
+
+            <label asp-for="Admin.Username"></label>
+            <input asp-for="Admin.Username" />
+            <span asp-validation-for="Admin.Username"></span>
+
+            <label asp-for="Admin.Password"></label>
+            <input asp-for="Admin.Password" type="password" />
+            <span asp-validation-for="Admin.Password"></span>
+
+            <button type="submit">Login as Admin</button>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    function showStudent() {
+        document.getElementById("studentForm").classList.remove("hidden");
+        document.getElementById("adminForm").classList.add("hidden");
+        document.getElementById("studentBtn").classList.add("active");
+        document.getElementById("adminBtn").classList.remove("active");
+    }
+
+    function showAdmin() {
+        document.getElementById("adminForm").classList.remove("hidden");
+        document.getElementById("studentForm").classList.add("hidden");
+        document.getElementById("adminBtn").classList.add("active");
+        document.getElementById("studentBtn").classList.remove("active");
+    }
+</script>

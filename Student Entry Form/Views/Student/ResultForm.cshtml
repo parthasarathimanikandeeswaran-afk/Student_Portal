@@ -1,0 +1,53 @@
+﻿@model ResultSearchViewModel
+
+
+@{
+    ViewData["Title"] = "Search Result";
+}
+
+<link rel="stylesheet" href="~/css/Result-form.css" />
+
+<div class="search-container">
+
+    <h1>Search Student Result</h1>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="error-msg">@ViewBag.Error</div>
+    }
+
+    <form class="search-form"
+          method="post"
+          asp-action="ResultForm"
+          asp-controller="Student">
+
+        <div class="form-group">
+            <label>Acknowledgement No</label>
+            <input asp-for="AckNo" placeholder="Enter Ack No" required />
+        </div>
+
+        <div class="form-group">
+            <label>Mobile Number</label>
+            <input asp-for="MobileNo" placeholder="Enter Mobile No" required />
+        </div>
+
+        <button type="submit">Search</button>
+
+    </form>
+
+   
+            @if (Context.Session.GetString("Role") == "Student")
+            {
+        <div style="height:auto; width:100%; display:flex; justify-content:center; margin-top:20px;">
+            <form asp-action="Logout" asp-controller="Student" method="post" class="logout-form">
+                <button type="submit" class="btn-logout btn btn-danger">Logout</button>
+            </form>
+        </div>
+            }
+       
+</div>
+
+
+
+
+

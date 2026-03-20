@@ -1,0 +1,221 @@
+﻿
+
+/* Page container */
+.edit-container {
+    max-width: 1100px; /* increased width */
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 35px 45px; /* more padding */
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    font-family: "Segoe UI", sans-serif;
+}
+
+    /* Headings */
+    .edit-container h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+    }
+
+    .edit-container h3 {
+        margin-top: 30px;
+        margin-bottom: 12px;
+        color: #444;
+    }
+
+/* Form layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+    .form-group label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #555;
+        font-weight: 600;
+    }
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"] {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4facfe;
+}
+
+/* Marks table */
+.marks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    .marks-table th {
+        background: #4facfe;
+        color: white;
+        padding: 10px;
+    }
+
+    .marks-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+/* Buttons */
+.btn-row {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-update {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 12px 26px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 12px;
+    transition: background 0.3s ease;
+}
+
+    .btn-update:hover {
+        background-color: #218838;
+    }
+
+.btn-cancel {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 12px 26px;
+    font-size: 16px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+    .btn-cancel:hover {
+        background-color: #c82333;
+    }
+
+/* Responsive */
+@media(max-width: 900px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+
+
+/* Button container */
+.btn-row {
+    margin-top: 25px;
+    text-align: center;
+}
+
+/* Submit / Update button */
+.btn-update {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    padding: 10px 24px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .btn-update:hover {
+        background-color: #218838;
+        transform: translateY(-1px);
+    }
+
+    .btn-update:active {
+        transform: translateY(0);
+    }
+
+/* Cancel button */
+.btn-cancel {
+    background-color: #dc3545;
+    color: #ffffff;
+    padding: 10px 24px;
+    font-size: 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-left: 10px;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .btn-cancel:hover {
+        background-color: #c82333;
+        transform: translateY(-1px);
+    }
+
+    .btn-cancel:active {
+        transform: translateY(0);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Common select styling */
+select {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    /* Focus effect */
+    select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+    }
+
+    /* Disabled select */
+    select:disabled {
+        background-color: #f2f2f2;
+        cursor: not-allowed;
+    }z
+
+    /* Dropdown arrow fix (Chrome / Edge) */
+    select::-ms-expand {
+        display: none;
+    }
+
+/* Optional: label spacing */
+.form-group select {
+    margin-top: 5px;
+}
